@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        .card {
+            width: 18rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Search Results</h1>
+        <div class="row">
+            {% for book in results %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="static/images/book1.jpg" class="card-img-top" alt="{{ book.book_name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.book_name }}</h5>
+                        <p class="card-text">{{ book.book_author }}</p>
+                        <a href="{{ url_for('book_app.book', book_id=book.book_id) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

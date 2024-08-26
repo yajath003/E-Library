@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block nav %}{% include 'nav1.html' %}{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+<div class="row">
+
+  <div class="offset-md-2 col-md-8">
+
+    <h4>Author Registration</h4>
+
+    {% from "_formhelpers.html" import render_field %}
+    <form method="POST" action="{{ url_for('.uregister')}}" role="form">
+
+      {{ form.hidden_tag() }}
+
+      {{ render_field(form.username, class='form-control') }}
+      {{ render_field(form.email, class='form-control') }}
+      {{ render_field(form.password, class='form-control') }}
+      {{ render_field(form.confirm, class='form-control') }}
+
+
+      <button type="submit" class="btn btn-primary">Register</button>
+
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

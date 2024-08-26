@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block nav %}{% include 'nav1.html' %}{% endblock %}
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+<form>
+    <p class="text-center"><strong>Click here to Signin</strong></p>
+    <div>
+        <p class="text-center"><a class = "btn btn-primary" href="{{ url_for('user_app.usignin') }}" role="button">signin</a></p>
+    </div>
+    <p class="text-center"><strong>New user?Click here to Signup<strong></p>
+    <div>
+        <p class="text-center"><a class = "btn btn-primary" href="{{ url_for('user_app.uregister') }}" role="button">signup</a></p>
+    </div>
+</form>
+{% endblock %}

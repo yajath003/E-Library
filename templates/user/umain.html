@@ -1,0 +1,88 @@
+<style>
+  .card {
+    width: 9rem; /* Adjust the width of the card */
+    height: 15rem; /* Adjust the height of the card */
+  }
+</style>
+
+{% extends "base.html" %}
+
+{% block title %}User Main Page{% endblock %}
+
+{% block nav %}
+  {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container">
+        <div class="list-group">
+          {% for category, message in messages %}
+
+            <div class="list-group-item list-group-item-action list-group-item-primary alert-{{ category }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+  <h1>All Available Books</h1>
+  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+  <a class="btn btn-primary" href="{{ url_for('user_app.mybooks') }}" role="button">My Books</a>
+  <a class="btn btn-primary" href="{{ url_for('user_app.profile') }}" role="button">Profile</a>
+  <h2>Recently Added Books</h2>
+  <div class="row no-gutters justify-content-start">
+    {% for recent_book in recent_books %}
+      <div class="col-md-auto">
+        <div class="card">
+          <img src="{{ recent_book.image_url }}" class="card-img-top" alt="{{ recent_book.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ recent_book.title }}</h5>
+            <p class="card-text">Author: {{ recent_book.author }}</p>
+            <a href="{{ url_for('book_app.book', book_id=recent_book.id) }}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if search_results %}
+    <h2>Search Results:</h2>
+    <div class="row no-gutters justify-content-start">
+      {% for book in search_results %}
+        <div class="col-md-auto">
+          <div class="card">
+            <img src="static/images/book1.jpg" class="card-img-top" alt="{{ book.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text">Author: {{ book.author }}</p>
+              <a href="{{ url_for('book_app.book', book_id=book.id) }}" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for section, books in books_by_section.items() %}
+      <h2>{{ section }}</h2>
+      <div class="row no-gutters justify-content-start">
+        {% for book in books %}
+          <div class="col-md-auto">
+            <div class="card">
+              <img src="static/images/book1.jpg" class="card-img-top" alt="{{ book[1] }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ book[1] }}</h5>
+                <p class="card-text">Author: {{ book[2] }}</p>
+                <a href="{{ url_for('book_app.book', book_id=book[0]) }}" class="btn btn-primary">View Details</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No books available.</p>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

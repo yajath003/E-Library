@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}User Signin{% endblock %}
+
+{% block nav %}{% include 'nav1.html' %}{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+<div class="row">
+
+  <div class="offset-md-2 col-md-8">
+
+
+    {% from "_formhelpers.html" import render_field %}
+    <form method="POST" action="{{ url_for('.usignin')}}" role="form">
+
+      {{ form.hidden_tag() }}
+
+      {{ render_field(form.username, class='form-control') }}
+      {{ render_field(form.password, class='form-control') }}
+
+      <button type="submit" class="btn btn-primary">Signin</button>
+            <div>
+        <div><br>
+
+        <h5>Register here:</h5>
+      </div>
+      <a class="btn btn-primary" href="{{ url_for('user_app.uregister') }}" role="button">Sign Up</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
