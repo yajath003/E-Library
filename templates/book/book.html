@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block nav %}
+  {% include 'nav1.html' %}
+{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+
+<h1>{{ book[1] }}</h1>
+<p>Author: {{ book[2] }}</p>
+<p>Description: {{ book[3] }}</p>
+<p>Date of Addition: {{ book[5] }}</p>
+
+<form action="{{ url_for('book_app.book', book_id=book[0]) }}" method="POST">
+  <button type="submit" class="btn btn-primary">Request</button>
+</form>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+{% endblock %}

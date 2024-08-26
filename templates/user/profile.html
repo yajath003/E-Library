@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}User Signin{% endblock %}
+
+{% block nav %}{% include 'nav1.html' %}{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+<form>
+        <p><h3>This is the profile page:</h3>
+        <div>
+            {% if info %}
+            <p>Name: {{ info[0][0] }}</p>
+            <p>Email: {{ info[0][1] }}</p>
+            <p>User-ID: {{ info[0][2] }}</p>
+            <p>Books you can read: {{ info[1] }}</p>
+            <p>Number of books requested by you: {{ info[2] }}</p>
+            {% endif %}
+        </div>
+    <a class="btn btn-secondary" href="{{ url_for('intro_app.index') }}" role="button">Logout</a>
+    </form>
+{% endblock %}

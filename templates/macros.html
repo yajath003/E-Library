@@ -1,0 +1,11 @@
+<!-- macros.html -->
+{% macro card(book) %}
+  <div class="card">
+    <img src="{{ book.image_url }}" class="card-img-top" alt="{{ book.title }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ book.title }}</h5>
+      <p class="card-text">Author: {{ book.author }}</p>
+      <a href="{{ url_for('book_app.book', book_id=book.id) }}" class="btn btn-primary">View Details</a>
+    </div>
+  </div>
+{% endmacro %}

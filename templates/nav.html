@@ -1,0 +1,32 @@
+<!-- Navbar -->
+<div class="container pb-3">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <!-- Center the site name -->
+      <a class="navbar-brand mx-auto" href="{{ url_for('intro_app.index') }}">
+        <h3>{{ config['SITE_NAME'] }}</h3>
+      </a>
+
+      <!-- Search Form -->
+      <form class="d-flex" method="POST" action="{{ url_for('user_app.search') }}">
+        {{ form.hidden_tag() }}
+        <input class="form-control" type="search" placeholder="Search for books" name="query">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('librarian_app.lregister')}}">Signup</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

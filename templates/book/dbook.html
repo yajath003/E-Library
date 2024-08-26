@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block nav %}
+  {% include 'nav1.html' %}
+{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+
+<form action="{{ url_for('book_app.dbook') }}" method="POST">
+  {% for section, books in books_by_section.items() %}
+    <div class="section">
+      <div class="row no-gutters align-items-center">
+        <div class="col-auto">
+          <input type="checkbox" class="section-checkbox" name="selected_sections[]" value="{{ section }}">
+        </div>
+        <div class="col">
+          <h2>{{ section }}</h2>
+        </div>
+      </div>
+      <div class="row no-gutters justify-content-start">
+        {% for book in books %}
+          <div class="col-md-auto">
+            <input type="checkbox" name="selected_books[]" value="{{ book[0] }}" class="book-checkbox" data-section="{{ section }}">
+            {{ book[1] }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">Delete selected books</button>
+</form>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  // Check all books in a section when the section checkbox is selected
+  document.querySelectorAll('.section-checkbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      var sectionName = this.value;
+      var booksInSection = document.querySelectorAll('.book-checkbox[data-section="' + sectionName + '"]');
+      booksInSection.forEach(function(bookCheckbox) {
+        bookCheckbox.checked = checkbox.checked;
+      });
+    });
+  });
+</script>
+{% endblock %}

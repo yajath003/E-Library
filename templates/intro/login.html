@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block nav %}
+  {% include 'nav1.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center mb-4"><strong>Login</strong></h4>
+          <div class="text-center mb-4">
+            <img src="static/images/back.jpg" alt="Logo" style="max-width: 150px;">
+          </div>
+          <div class="text-center mb-3">
+            <h5 class="mb-0"><strong>Login as Librarian:</strong></h5>
+            <a class="btn btn-primary mt-2" href="{{ url_for('librarian_app.librarian') }}" role="button">Librarian</a>
+          </div>
+          <hr>
+          <div class="text-center">
+            <h5 class="mb-0"><strong>Login as User:</strong></h5>
+            <a class="btn btn-primary mt-2" href="{{ url_for('user_app.user') }}" role="button">User</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

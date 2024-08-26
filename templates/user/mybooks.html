@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block nav %}
+  {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+
+<h4>My Books:</h4>
+<div class="row no-gutters">
+  {% if accepted_books %}
+    {% for accepted_book in accepted_books %}
+      <div class="col-md-auto mb-0">
+        <div class="card" style="width: 9rem;">
+          <img src="static/images/book1.jpg" class="card-img-top" alt="Book Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ accepted_book[2] }}</h5>
+            <p class="card-text">Valid until: {{ accepted_book[6] }}</p>
+            <a href="{{ url_for('static', filename='files/' + accepted_book[2] + '.pdf') }}" class="btn btn-primary" target="_blank">View Book</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>You have no accepted books.</p>
+  {% endif %}
+</div>
+
+<h4>Requested Books:</h4>
+<div class="row no-gutters">
+  {% if requested_books %}
+    {% for requested_book in requested_books %}
+      <div class="col-md-auto mb-0">
+        <div class="card" style="width: 9rem;">
+          <img src="static/images/book1.jpg" class="card-img-top" alt="Book Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ requested_book[3] }}</h5>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>You haven't requested any book.</p>
+  {% endif %}
+</div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+{% endblock %}

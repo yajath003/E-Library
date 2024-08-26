@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Librarian Main Page{% endblock %}
+
+{% block nav %}
+  {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container">
+        <div class="list-group">
+          {% for category, message in messages %}
+
+            <div class="list-group-item list-group-item-action list-group-item-primary alert-{{ category }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+  <a class="btn btn-primary" href="{{ url_for('book_app.editbook') }}" role="button">Add Books</a>
+  <a class="btn btn-primary" href="{{ url_for('book_app.dbook') }}" role="button">Delete books</a>
+  <a class="btn btn-primary position-relative" href="{{ url_for('librarian_app.accbook') }}" role="button">
+    Accept Books
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ count }}
+      <span class="visually-hidden">unread messages</span>
+    </span>
+  </a>
+  <h4>Accepted Books:</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Book ID</th>
+          <th scope="col">Book Name</th>
+          <th scope="col">Username</th>
+          <th scope="col">Accepted by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if all_requests %}
+          {% for request in all_requests %}
+            <tr>
+              <td>{{ request[0] }}</td>
+              <td>{{ request[1] }}</td>
+              <td>{{ request[2] }}</td>
+              <td>{{ request[3] }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4">No accepted books found.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

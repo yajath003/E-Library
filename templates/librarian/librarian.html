@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Librarian{% endblock %}
+
+{% block nav %}
+  {% include 'nav1.html' %}
+{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning mb-3" onclick="goBack()">Go Back</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center mb-4"><strong>Welcome, Librarian!</strong></h4>
+          <form>
+            <div class="text-center mb-4">
+              <p><strong>Already have an account?</strong></p>
+              <a class="btn btn-primary" href="{{ url_for('librarian_app.lsignin') }}" role="button">Sign In</a>
+            </div>
+            <hr>
+            <div class="text-center">
+              <p><strong>New user?</strong></p>
+              <a class="btn btn-primary" href="{{ url_for('librarian_app.lregister') }}" role="button">Sign Up</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

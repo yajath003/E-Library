@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}sections{% endblock %}
+
+{% block nav %}{% include 'nav1.html' %}{% endblock %}
+
+{% block content %}
+<button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+{% from "_formhelpers.html" import render_field %}
+<form method="POST" action="{{ url_for('.editsection') }}" role="form">
+
+    {{ form.hidden_tag() }}
+
+    {{ render_field(form.section_name, class='form-control') }}
+    <button type="submit" class="btn btn-primary">Add Section</button>
+</form>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+{% endblock %}

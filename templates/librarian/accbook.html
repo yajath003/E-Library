@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Accept Book{% endblock %}
+
+{% block nav %}
+  {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+
+  <h2>Requested Books</h2>
+  {% if req %}
+    <form method="POST" action="{{ url_for('.accbook') }}">
+      {% for request in req %}
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="book_id" id="book_{{ request[0] }}" value="{{ request[1] }}">
+          <label class="form-check-label" for="book_{{ request[0] }}">
+            {{ request[3] }} - Requested by: {{ request[2] }}
+          </label>
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Accept Selected Book</button>
+    </form>
+  {% else %}
+    <p>No books are currently requested.</p>
+  {% endif %}
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+{% endblock %}

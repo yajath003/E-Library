@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Add Book{% endblock %}
+
+{% block nav %}
+  {% include 'nav1.html' %}
+{% endblock %}
+
+  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+  <a class="btn btn-primary" href="{{ url_for('book_app.editbook') }}" role="button">Add Books</a>
+  <a class="btn btn-primary" href="{{ url_for('librarian_app.accbook') }}" role="button">Accept Books</a>
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  <h1>Edit Book</h1>
+  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+  {% from "_formhelpers.html" import render_field %}
+  <form method="POST" action="{{ url_for('.editbook') }}" role="form" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+      {{ render_field(form.book_name, class='form-control') }}
+    </div>
+
+    <div class="form-group">
+      {{ render_field(form.book_description, class='form-control') }}
+    </div>
+
+    <div class="form-group">
+      {{ render_field(form.book_author, class='form-control') }}
+    </div>
+
+    <div class="form-group">
+      {{ render_field(form.book_file, class='form-control') }}
+    </div>
+
+    <div class="form-group">
+      <h4>Select a Section:</h4>
+      <label for="section_name"></label><br>
+      {% if form.section_name %}
+      {{ render_field(form.section_name) }}
+        {% for id, name in form.section_name.choices %}
+          <label for="{{ form.section_name.id }}_{{ id }}"></label><br>
+        {% endfor %}
+      {% else %}
+        <p>No sections available</p>
+      {% endif %}
+    </div>
+    <h4>Create a new section:</h4>
+    <a class="btn btn-primary" href="{{ url_for('section_app.editsection') }}" role="button">Add Section</a>
+
+    <button type="submit" class="btn btn-primary">Add Book</button>
+  </form>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+{% endblock %}
