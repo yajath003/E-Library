@@ -33,19 +33,17 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField('User Name', [validators.InputRequired()])
     password = PasswordField('Password', [
-            validators.InputRequired(),
-            validators.Length(min=4, max=80)
-        ])
+        validators.InputRequired(),
+        validators.Length(min=4, max=80)
+    ])
     submit = SubmitField('Login')
 
-    def validate(self):
-        rv = FlaskForm.validate(self)
+    def validate(self, extra_validators=None):
+        rv = super().validate(extra_validators=extra_validators)  # Call the parent class validate method
         if not rv:
             return False
 
-        user = user_login.query.filter_by(
-            username = self.username.data,
-            ).first()
+        user = user_login.query.filter_by(username=self.username.data).first()
 
         if user:
             if not check_password_hash(user.password, self.password.data):
@@ -55,6 +53,7 @@ class LoginForm(FlaskForm):
         else:
             self.password.errors.append('Incorrect email or password')
             return False
+
 
 class SearchForm(FlaskForm):
     search = StringField('search', [validators.InputRequired()])
