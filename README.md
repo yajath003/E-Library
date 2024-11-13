@@ -80,16 +80,16 @@ Start the server
 
 ## Screenshots
 
-![App Screenshot](https://drive.google.com/file/d/13fyreJYHG-76wRtAlRL6L1DXMJLYuDRe/view?usp=sharing)
+![App Screenshot](images/Intro.png)
 
-![](https://drive.google.com/file/d/1it7BkHwnBZIu32hRjPybgoz9WlRkFwBq/view?usp=sharing)
-
-
-![](https://drive.google.com/file/d/10lZ4kGkAwh9h8YFt70WinR9ws_aryGmy/view?usp=sharing)
+![](images/Librarian_dashboard.png)
 
 
-![](https://drive.google.com/file/d/1mCzlSdK-tncmp4BU3Sz5pRBKgKg5lnPt/view?usp=sharing)
+![](images/User_dashboard.png)
 
 
-![](https://drive.google.com/file/d/1h6q_oEYrterP11aCWpwIsVUjxS8-zYdp/view?usp=sharing)
+![](images/user_books.png)
+
+
+![](images/user_profile.png)
 
