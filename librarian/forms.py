@@ -27,6 +27,7 @@ class RegisterForm(FlaskForm):
         if author is not None:
             raise ValidationError('Email already in use, please use a different one.')
 
+
 class LoginForm(FlaskForm):
     librarian_name = StringField('Librarian Name', [validators.InputRequired()])
     password = PasswordField('Password', [
@@ -35,14 +36,12 @@ class LoginForm(FlaskForm):
         ])
     submit = SubmitField('Login')
 
-    def validate(self):
-        rv = FlaskForm.validate(self)
+    def validate(self, extra_validators=None):
+        rv = super().validate(extra_validators=extra_validators)  # Call the parent class validate method
         if not rv:
             return False
 
-        user = lib_login.query.filter_by(
-            librarian_name = self.librarian_name.data,
-            ).first()
+        user = lib_login.query.filter_by(librarian_name=self.librarian_name.data).first()
 
         if user:
             if not check_password_hash(user.password, self.password.data):
@@ -52,3 +51,4 @@ class LoginForm(FlaskForm):
         else:
             self.password.errors.append('Incorrect email or password')
             return False
+
