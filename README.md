@@ -79,17 +79,17 @@ Start the server
 
 
 ## Screenshots
-
-![App Screenshot](images/Intro.png)
-
+**Intro page**\
+![](images/Intro.png)
+**Librarian dashboard**\
 ![](images/Librarian_dashboard.png)
 
-
+**User dashboard**\
 ![](images/User_dashboard.png)
 
-
+**User books**\
 ![](images/user_books.png)
 
-
+**User profile**\
 ![](images/user_profile.png)
 
